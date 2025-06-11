@@ -1,0 +1,684 @@
+              @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Dancing Script', cursive;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+            /* Changed background to deeper, more vibrant colors */
+            background: linear-gradient(135deg, #f0c0ff, #d6a3ff, #b980ff, #9966ff)!important;
+            animation: gradientBG 15s ease infinite !;
+            background-size: 400% 400%;
+            padding: 20px;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Floating elements animations */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            /* Changed heart color to gold */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FFD700" opacity="0.8"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.7;
+            animation: floating 15s linear infinite;
+        }
+        
+        .balloon {
+            position: absolute;
+            width: 30px;
+            height: 40px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), transparent), 
+                        linear-gradient(to right, #b980ff, #7a36ff);
+            animation: balloon-float 20s linear infinite;
+        }
+        
+        .balloon::after {
+            content: '';
+            position: absolute;
+            width: 1px;
+            height: 50px;
+            bottom: -48px;
+            left: 50%;
+            background: rgba(255,255,255,0.7);
+        }
+        
+        .stars {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FFD700" opacity="0.9"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: twinkle 8s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.8);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes balloon-float {
+            0% {
+                transform: translateY(100vh) translateX(0vw) rotate(0deg);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(50vh) translateX(5vw) rotate(5deg);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(-20vh) translateX(2vw) rotate(-5deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { 
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            50% { 
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+        
+        /* Cake container */
+        .cake-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 50px;
+            z-index: 1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Cake design */
+        .cake {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.3));
+            margin-top: 100px;
+            transition: transform 0.5s, filter 0.5s;
+        }
+        
+        .cake:hover {
+            filter: drop-shadow(0 20px 30px rgba(122, 54, 255, 0.6));
+            transform: scale(1.05) rotate(1deg);
+        }
+        
+        .cake-layer {
+            border-radius: 12px;
+            /* Changed cake color to match new theme */
+            background: linear-gradient(to bottom, #efe7fd, #d9c9fa);
+            position: relative;
+            box-shadow: inset 0 -15px 20px -10px rgba(0,0,0,0.25);
+            z-index: 2;
+            transition: all 0.3s;
+        }
+        
+        .cake-layer::before {
+            content: '';
+            position: absolute;
+            width: 105%;
+            height: 18px;
+            /* Changed frosting color */
+            background: linear-gradient(to right, #b980ff, #7a36ff, #b980ff);
+            top: 0;
+            left: -2.5%;
+            border-radius: 8px 8px 0 0;
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
+        }
+        
+        .cake-layer::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle, #fff 2px, transparent 2px),
+                radial-gradient(circle, #dfc5ff 1px, transparent 1px),
+                radial-gradient(circle, #b980ff 1px, transparent 1px);
+            background-size: 16px 16px, 12px 12px, 10px 10px;
+            background-position: 0 0, 5px 5px, 10px 10px;
+            opacity: 0.6;
+            top: 18px;
+            left: 0;
+            border-radius: 0 0 8px 8px;
+            pointer-events: none;
+        }
+        
+        .layer-3 {
+            width: 160px;
+            height: 45px;
+            border-radius: 10px;
+            z-index: 1;
+            transform: perspective(500px) rotateX(5deg);
+        }
+        
+        .layer-2 {
+            width: 220px;
+            height: 55px;
+            border-radius: 12px;
+            margin-top: -15px;
+            z-index: 2;
+            transform: perspective(500px) rotateX(5deg);
+        }
+        
+        .layer-1 {
+            width: 270px;
+            height: 65px;
+            border-radius: 14px;
+            margin-top: -15px;
+            z-index: 3;
+            transform: perspective(500px) rotateX(5deg);
+        }
+        
+        .cake-plate {
+            width: 300px;
+            height: 25px;
+            background: linear-gradient(to bottom, #fff, #e0e0e0);
+            border-radius: 10px;
+            margin-top: -15px;
+            box-shadow: 0 15px 20px -5px rgba(0,0,0,0.2);
+            z-index: 4;
+            transform: perspective(500px) rotateX(5deg);
+        }
+        
+        /* Cake shimmer effect */
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        
+        /* Candles */
+        .candles-container {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 5;
+            transform-style: preserve-3d;
+        }
+        
+        .candle {
+            position: relative;
+            width: 8px;
+            height: 60px;
+            /* Changed candle color */
+            background: linear-gradient(to bottom, #9966ff, #b980ff, #dfc5ff);
+            border-radius: 4px;
+            margin: 0 14px;
+            cursor: pointer;
+            transition: transform 0.5s;
+            animation: candle-sway 3s infinite ease-in-out;
+            animation-delay: calc(var(--delay) * 0.5s);
+        }
+        
+        @keyframes candle-sway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+        
+        .candle::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 25px;
+            background: radial-gradient(ellipse at center, #fff 10%, #ffcc80 30%, #ff9800 70%, #ff5722 100%);
+            border-radius: 50% 50% 20% 20%;
+            filter: blur(1px);
+            box-shadow: 
+                0 0 15px 5px rgba(255, 165, 0, 0.7),
+                0 0 30px 10px rgba(255, 165, 0, 0.4),
+                0 0 40px 15px rgba(255, 255, 255, 0.3);
+            animation: flicker 1s ease-in-out infinite alternate;
+            z-index: 5;
+        }
+        
+        .candle.blown::before {
+            opacity: 0;
+            animation: none;
+            transition: opacity 0.3s, transform 0.5s;
+        }
+        
+        .candle.blown {
+            transform: rotate(5deg) translateY(2px);
+        }
+        
+        @keyframes flicker {
+            0% {
+                transform: translateX(-50%) scaleY(1) scaleX(1);
+                opacity: 0.8;
+                box-shadow: 
+                    0 0 15px 5px rgba(255, 165, 0, 0.7),
+                    0 0 30px 10px rgba(255, 165, 0, 0.4);
+            }
+            25% {
+                transform: translateX(-50%) scaleY(1.1) scaleX(0.9);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(-50%) scaleY(0.9) scaleX(1.1);
+                opacity: 0.9;
+                box-shadow: 
+                    0 0 20px 7px rgba(255, 165, 0, 0.8),
+                    0 0 40px 15px rgba(255, 165, 0, 0.5);
+            }
+            75% {
+                transform: translateX(-50%) scaleY(1.05) scaleX(0.95);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-50%) scaleY(1) scaleX(1);
+                opacity: 0.8;
+                box-shadow: 
+                    0 0 15px 5px rgba(255, 165, 0, 0.7),
+                    0 0 30px 10px rgba(255, 165, 0, 0.4);
+            }
+        }
+        
+        /* Decoration elements */
+        .decoration {
+            position: absolute;
+            z-index: 6;
+        }
+        
+        .flower {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            /* Changed flower color */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 15 C 55 5, 65 5, 70 15 C 80 20, 80 30, 70 35 C 65 45, 55 45, 50 35 C 45 45, 35 45, 30 35 C 20 30, 20 20, 30 15 C 35 5, 45 5, 50 15" fill="%23b980ff" stroke="%23ffffff" stroke-width="1" /></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: flower-wiggle 4s infinite ease-in-out;
+            animation-delay: calc(var(--delay) * 1s);
+        }
+        
+        @keyframes flower-wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+        
+        /* Birthday message */
+        .birthday-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #fff; /* Changed base color for better visibility */
+            text-align: center;
+            margin-top: 40px;
+            opacity: 0;
+            transition: opacity 2s, transform 2s;
+           
+            transform: translateY(20px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .birthday-message.visible {
+            opacity: 1;
+            transform: translateY(0);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+
+            .message-text {
+                /* Updated gradient for new colors */
+                background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+                background-size: 300% 300%;
+                animation: gradient-text 6s ease infinite;
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                margin-bottom: 20px;
+                font-weight: bold;
+                line-height: 1.4;
+                padding: 0 20px;
+                 /* Updated stroke color */
+            }
+        
+        
+        @keyframes gradient-text {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+       
+        
+        .next-button {
+            /* Updated gradient colors */
+            background: linear-gradient(135deg, #ff7eb3, #ff758c, #ff3d7f);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            font-size: 1.3rem;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            box-shadow: 0 8px 20px rgba(255, 61, 127, 0.5);
+            opacity: 0;
+            display: none;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+        }
+        
+        .next-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .next-button.visible {
+            display: block;
+            opacity: 1;
+            animation: fadeInUp 1s forwards;
+        }
+        
+        .next-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(122, 54, 255, 0.7);
+            background: linear-gradient(135deg, #6929e8, #4a1ca3);
+        }
+        
+        .next-button:hover::before {
+            left: 100%;
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Audio controls */
+        .audio-control {
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            z-index: 100;
+            transition: transform 0.3s, background 0.3s;
+        }
+        
+        .audio-control:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .audio-control i {
+            font-size: 22px;
+            color: #7a36ff; /* Changed color */
+            transition: transform 0.3s;
+        }
+        
+        .audio-control:hover i {
+            transform: scale(1.1);
+        }
+        
+        /* Confetti animation */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 10;
+            display: none;
+        }
+        
+        .confetti-container.active {
+            display: block;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #7a36ff; /* Changed color */
+            opacity: 0.8;
+            animation: confetti-fall 5s linear infinite;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100%) rotate(0deg) scale(0.7);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        /* Ribbon decorations */
+        .ribbon {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            /* Changed ribbon color */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M40,20 C60,0 80,20 70,40 C90,30 100,50 80,70 C100,90 80,100 60,80 C70,100 50,110 30,90 C10,110 0,90 20,70 C0,50 10,30 30,40 C20,20 40,0 40,20 Z" fill="%23b980ff" stroke="%23ffffff" stroke-width="1" /></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.8;
+            transform: scale(0.5);
+        }
+        
+        /* Gift box */
+        .gift-box {
+            position: absolute;
+            width: 60px;
+            height: 70px;
+            z-index: 5;
+            animation: gift-float 5s infinite ease-in-out;
+            animation-delay: calc(var(--delay) * 1s);
+        }
+        
+        .gift-box-body {
+            position: absolute;
+            width: 100%;
+            height: 70%;
+            bottom: 0;
+            /* Changed gift box color */
+            background: linear-gradient(135deg, #b980ff, #7a36ff);
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gift-box-lid {
+            position: absolute;
+            width: 110%;
+            height: 20%;
+            top: 10%;
+            left: -5%;
+            /* Changed lid color */
+            background: linear-gradient(135deg, #5e22cc, #4a1ca3);
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+        }
+        
+        .gift-box-ribbon {
+            position: absolute;
+            width: 20%;
+            height: 100%;
+            top: 0;
+            left: 40%;
+            background: #FFD700; /* gold ribbon */
+            z-index: 2;
+        }
+        
+        .gift-box-ribbon::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 30%;
+            top: 20%;
+            left: -50%;
+            background: #FFD700; /* gold ribbon */
+            border-radius: 5px;
+        }
+        
+        @keyframes gift-float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .cake-layer {
+                transform: scale(0.8);
+            }
+            
+            .layer-3 {
+                width: 120px;
+            }
+            
+            .layer-2 {
+                width: 160px;
+            }
+            
+            .layer-1 {
+                width: 200px;
+            }
+            
+            .cake-plate {
+                width: 230px;
+            }
+            
+            .candle {
+                margin: 0 8px;
+                width: 6px;
+                height: 45px;
+            }
+            
+            .birthday-message {
+                font-size: 2rem;
+            }
+            
+            .next-button {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .cake-layer {
+                transform: scale(0.6);
+            }
+            
+            .layer-3 {
+                width: 100px;
+            }
+            
+            .layer-2 {
+                width: 130px;
+            }
+            
+            .layer-1 {
+                width: 160px;
+            }
+            
+            .cake-plate {
+                width: 190px;
+            }
+            
+            .candle {
+                margin: 0 6px;
+                width: 5px;
+                height: 40px;
+            }
+            
+            .birthday-message {
+                font-size: 1.5rem;
+            }
+            
+            .next-button {
+                font-size: 0.9rem;
+                padding: 8px 16px;
+            }
+        }
+
+  
